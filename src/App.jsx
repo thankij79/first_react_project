@@ -1,8 +1,7 @@
 import React from "react";
-import ToggleBtn from "./Components/ToggleBtn";
 
 const App = () => {
-  return <ToggleBtn />;
+  return <div>App</div>;
 };
 
 export default App;
