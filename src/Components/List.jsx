@@ -1,6 +1,6 @@
 import React from "react";
 
-function List() {
+const List = () => {
   const user = [
     { id: 1, name: "Rahul" },
     { id: 2, name: "Jenil" },
@@ -9,12 +9,11 @@ function List() {
   return (
     <div>
       <h1>List Of User</h1>
-      <ul>
-        {user.map((user) => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
+      {user.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
     </div>
   );
-}
+};
+
 export default List;

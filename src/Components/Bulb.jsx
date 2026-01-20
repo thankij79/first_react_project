@@ -14,6 +14,7 @@ const Bulb = () => {
           backgroundColor: isOn ? "yellow" : "grey",
           height: "50px",
           width: "50px",
+          transition: "background-color 3s ease",
         }}
       ></div>
       <button onClick={onClick}>{isOn ? "SwitchOff" : "SwitchOn"}</button>
