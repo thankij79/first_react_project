@@ -1,28 +1,20 @@
-import React from 'react';
+import React from "react";
+import "./DigiId.css";
 
-const DigiId = ({name,age,role,HandleDelete}) => {
- 
-  
-
+const DigiId = ({ name, age, role, HandleDelete }) => {
   return (
-    <div style={{
-      backgroundColor: role==="Captain" ? "blue": role==="Engineer" ? "red":"transparent",
-      display:"inline-block",
-      margin:"10px",
-      padding:"10px",
-      border:"2px solid black",
-      borderRadius:"10px",
-      alignItems:"center",
-      justifyContent:"center",
-      textAlign:"center"
-    }}>
+    <div className="digiIdContainer border-2 border-blue-500 m-8 p-8 rounded-lg bg-gray-100 shadow-md hover:shadow-lg transition-shadow duration-300 hover:bg-blue-950 hover:text-white">
       <h1>Name:{name}</h1>
       <h2>Age:{age}</h2>
       <h3>Role:{role}</h3>
-      <button onClick={HandleDelete}>Delete</button>
+      <button
+        onClick={HandleDelete}
+        className="deleteButton mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700 transition-colors duration-300"
+      >
+        Delete
+      </button>
     </div>
-  )
-}
+  );
+};
 
-
-export default DigiId
+export default DigiId;

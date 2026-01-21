@@ -1,5 +1,5 @@
 import React from "react";
-import DigiId from "./Components/DigiId";
+import DigiId from "./components/DigiId";
 const App = () => {
   const [data, setData] = React.useState([
     { id: 1, name: "John", age: 30, role: "Captain" },
@@ -13,14 +13,7 @@ const App = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        textAlign: "center",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <div className="md:flex appContainer p-8 bg-gray-50 min-h-screen flex flex-col items-center justify-center gap-4 animate-pulse">
       {data.map((d) => (
         <DigiId
           key={d.id}
