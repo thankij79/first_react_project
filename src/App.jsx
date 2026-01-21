@@ -1,5 +1,10 @@
 import React from "react";
-import DigiId from "./components/DigiId";
+import DigiId from "./Components/DigiId";
+import NewMenu from "./Components/NewMenu";
+import Cars from "./Components/Cars";
+import FindUser from "./Components/FindUser";
+import Array from "./Components/Array";
+import ArrayNum from "./Components/ArrayNum";
 const App = () => {
   const [data, setData] = React.useState([
     { id: 1, name: "John", age: 30, role: "Captain" },
@@ -23,6 +28,11 @@ const App = () => {
           HandleDelete={() => HandleDelete(d.id)}
         />
       ))}
+      <NewMenu />
+      <Cars />
+      <FindUser />
+      <Array />
+      <ArrayNum />
     </div>
   );
 };
