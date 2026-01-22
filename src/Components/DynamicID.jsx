@@ -1,46 +1,74 @@
 import React from "react";
 import "../Styles/components/DigitalId.css";
 
-const DynamicID = (id, name, position, age) => {
+const DynamicID = ({ mode = "add", onAdd, name, position, age, onDelete }) => {
+  const [formData, setFormData] = React.useState({
+    name: "",
+    position: "",
+    age: "",
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  function handleAdd() {
+    if (!formData.name || !formData.position || !formData.age) return;
+    onAdd(formData);
+    setFormData({ name: "", position: "", age: "" });
+  }
+
   return (
-    <>
-      <div className="id-card">
-        <div className="input-group">
-          <label htmlFor="dynamic-name">Enter Name Here:</label>
-          <input
-            id="dynamic-name"
-            type="text"
-            placeholder="Enter name here..."
-            value={name}
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="dynamic-position">Enter Position Here:</label>
-          <input
-            id="dynamic-position"
-            type="text"
-            placeholder="Enter position here..."
-            value={position}
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="dynamic-age">Enter Age Here:</label>
-          <input
-            id="dynamic-age"
-            type="number"
-            placeholder="Enter age here..."
-            value={age}
-          />
-        </div>
-        <div className="actions">
-          <>
-            <button className="new">ADD</button>
-            <button>EDIT</button>
-            <button className="delete">DELETE</button>
-          </>
-        </div>
+    <div className="id-card">
+      <div className="input-group">
+        <label>Name</label>
+        <input
+          type="text"
+          name="name"
+          value={mode === "add" ? formData.name : name}
+          onChange={handleChange}
+          disabled={mode === "view"}
+        />
       </div>
-    </>
+
+      <div className="input-group">
+        <label>Position</label>
+        <input
+          type="text"
+          name="position"
+          value={mode === "add" ? formData.position : position}
+          onChange={handleChange}
+          disabled={mode === "view"}
+        />
+      </div>
+
+      <div className="input-group">
+        <label>Age</label>
+        <input
+          type="number"
+          name="age"
+          value={mode === "add" ? formData.age : age}
+          onChange={handleChange}
+          disabled={mode === "view"}
+        />
+      </div>
+
+      <div className="actions">
+        {mode === "add" ? (
+          <button onClick={handleAdd} className="new">
+            ADD
+          </button>
+        ) : (
+          <>
+            <button>EDIT</button>
+            <button onClick={onDelete} className="delete">
+              DELETE
+            </button>
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 
