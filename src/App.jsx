@@ -2,18 +2,17 @@ import React from "react";
 import DynamicID from "./Components/DynamicID";
 
 const App = () => {
+  const [currentId, setCurrentId] = React.useState(1);
   const [cards, setCards] = React.useState([]);
 
-  function handleAddCard(cardData) {
-    setCards([
-      ...cards,
-      {
-        ...cardData,
-      },
-    ]);
+  function handleAdd(data) {
+    setCards([...cards, { ...data, id: currentId }]);
+    setCurrentId(currentId + 1);
   }
-
-  function handleDeleteCard(id) {
+  function handleEdit(data) {
+    setCards(cards.map((card) => (card.id === data.id ? { ...data } : card)));
+  }
+  function handleDelete(id) {
     setCards(cards.filter((card) => card.id !== id));
   }
 
@@ -21,7 +20,7 @@ const App = () => {
     <div>
       <h2>Add New ID Card</h2>
 
-      <DynamicID mode="add" onAdd={handleAddCard} />
+      <DynamicID mode="add" onAdd={handleAdd} />
 
       <h2>Existing ID Cards</h2>
 
@@ -29,10 +28,12 @@ const App = () => {
         <DynamicID
           key={card.id}
           mode="view"
+          id={card.id}
           name={card.name}
           position={card.position}
           age={card.age}
-          onDelete={() => handleDeleteCard(card.id)}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
         />
       ))}
     </div>

@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Styles/components/DigitalId.css";
 
-const DynamicID = ({ mode = "add", onAdd, name, position, age, onDelete }) => {
+const DynamicID = ({
+  mode = "add",
+  id,
+  name,
+  position,
+  age,
+  onAdd,
+  onEdit,
+  onDelete,
+}) => {
   const [formData, setFormData] = React.useState({
-    name: "",
-    position: "",
-    age: "",
+    name: name || "",
+    position: position || "",
+    age: age || undefined,
   });
+
+  const [editToggle,setEditToggle] = useState(false):
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -14,9 +25,16 @@ const DynamicID = ({ mode = "add", onAdd, name, position, age, onDelete }) => {
   }
 
   function handleAdd() {
-    if (!formData.name || !formData.position || !formData.age) return;
     onAdd(formData);
-    setFormData({ name: "", position: "", age: "" });
+  }
+
+  function handleEdit() {
+    onEdit(formData);
+
+    setEditToggle(false);
+  }
+  function handleDelete(){
+    onDelete(id);
   }
 
   return (
@@ -26,9 +44,9 @@ const DynamicID = ({ mode = "add", onAdd, name, position, age, onDelete }) => {
         <input
           type="text"
           name="name"
-          value={mode === "add" ? formData.name : name}
+          value={formData.name}
           onChange={handleChange}
-          disabled={mode === "view"}
+          required
         />
       </div>
 
@@ -37,9 +55,9 @@ const DynamicID = ({ mode = "add", onAdd, name, position, age, onDelete }) => {
         <input
           type="text"
           name="position"
-          value={mode === "add" ? formData.position : position}
+          value={formData.position}
           onChange={handleChange}
-          disabled={mode === "view"}
+          required
         />
       </div>
 
@@ -48,28 +66,25 @@ const DynamicID = ({ mode = "add", onAdd, name, position, age, onDelete }) => {
         <input
           type="number"
           name="age"
-          value={mode === "add" ? formData.age : age}
+          value={formData.age}
           onChange={handleChange}
-          disabled={mode === "view"}
+          required
         />
       </div>
 
       <div className="actions">
         {mode === "add" ? (
-          <button onClick={handleAdd} className="new">
+          <button className="new" onClick={handleAdd}>
             ADD
           </button>
         ) : (
           <>
             <button>EDIT</button>
-            <button onClick={onDelete} className="delete">
-              DELETE
-            </button>
+            <button className="delete">DELETE</button>
           </>
         )}
       </div>
     </div>
   );
 };
-
 export default DynamicID;
