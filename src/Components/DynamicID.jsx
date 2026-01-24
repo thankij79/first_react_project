@@ -17,7 +17,7 @@ const DynamicID = ({
     age: age || undefined,
   });
 
-  const [editToggle,setEditToggle] = useState(false):
+  const [editToggle, setEditToggle] = useState(false);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -28,13 +28,12 @@ const DynamicID = ({
     onAdd(formData);
   }
 
-  function handleEdit() {
-    onEdit(formData);
-
-    setEditToggle(false);
-  }
-  function handleDelete(){
+  function handleDelete() {
     onDelete(id);
+  }
+  function handleSave() {
+    onEdit(id, formData);
+    setEditToggle(false);
   }
 
   return (
@@ -46,6 +45,7 @@ const DynamicID = ({
           name="name"
           value={formData.name}
           onChange={handleChange}
+          disabled={mode !== "add" && !editToggle}
           required
         />
       </div>
@@ -57,6 +57,7 @@ const DynamicID = ({
           name="position"
           value={formData.position}
           onChange={handleChange}
+          disabled={mode !== "add" && !editToggle}
           required
         />
       </div>
@@ -68,6 +69,7 @@ const DynamicID = ({
           name="age"
           value={formData.age}
           onChange={handleChange}
+          disabled={mode !== "add" && !editToggle}
           required
         />
       </div>
@@ -77,10 +79,14 @@ const DynamicID = ({
           <button className="new" onClick={handleAdd}>
             ADD
           </button>
+        ) : editToggle ? (
+          <button onClick={handleSave}>SAVE</button>
         ) : (
           <>
-            <button>EDIT</button>
-            <button className="delete">DELETE</button>
+            <button onClick={() => setEditToggle(true)}>EDIT</button>
+            <button className="delete" onClick={handleDelete}>
+              DELETE
+            </button>
           </>
         )}
       </div>
