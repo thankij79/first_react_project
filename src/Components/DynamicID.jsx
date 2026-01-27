@@ -26,6 +26,7 @@ const DynamicID = ({
 
   function handleAdd() {
     onAdd(formData);
+    setFormData({ name: "", position: "", age: "" });
   }
 
   function handleDelete() {
